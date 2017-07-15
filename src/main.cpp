@@ -861,10 +861,10 @@ bool CheckTransaction(const CTransaction& tx, CValidationState &state,
         txnouttype whichType;
         ::IsStandard(txout.scriptPubKey, whichType);
 
-        if ((whichType != TX_PUBKEY &&
-             whichType != TX_PUBKEYHASH &&
-             whichType != TX_MULTISIG &&
-             whichType != TX_SCRIPTHASH) &&
+        if ((whichType == TX_PUBKEY &&
+             whichType == TX_PUBKEYHASH &&
+             whichType == TX_MULTISIG &&
+             whichType == TX_SCRIPTHASH) &&
              chainActive.Height() > Params().GetConsensus().hfFixP2SHHeight &&
              !tx.IsCoinBase())
         {
