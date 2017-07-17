@@ -872,17 +872,16 @@ bool CheckTransaction(const CTransaction& tx, CValidationState &state,
                              REJECT_CHECKBLOCKATHEIGHT_NOT_FOUND, "op-checkblockatheight-needed");
         }
 
-        /*if ((whichType != TX_PUBKEY_REPLAY &&
+        if ((whichType != TX_PUBKEY_REPLAY &&
              whichType != TX_PUBKEYHASH_REPLAY &&
-             whichType != TX_MULTISIG_REPLAY &&
-             whichType != TX_SCRIPTHASH_REPLAY) &&
+             whichType != TX_MULTISIG_REPLAY) &&
              chainActive.Height() < Params().GetConsensus().hfFixP2SHHeight &&
              chainActive.Height() > Params().GetConsensus().sfReplayProtectionHeight &&
              !tx.IsCoinBase())
         {
             return state.DoS(100, error("%s: %s: op-checkblockatheight-needed. Tx id: %s", __FILE__, __func__, tx.GetHash().ToString()),
                              REJECT_CHECKBLOCKATHEIGHT_NOT_FOUND, "op-checkblockatheight-needed");
-        }*/
+        }
 
         /*if (whichType == TX_SCRIPTHASH_REPLAY &&
             chainActive.Height() < Params().GetConsensus().hfFixP2SHHeight)
