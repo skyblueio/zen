@@ -861,18 +861,18 @@ bool CheckTransaction(const CTransaction& tx, CValidationState &state,
         txnouttype whichType;
         ::IsStandard(txout.scriptPubKey, whichType);
 
-        if ((whichType == TX_PUBKEY &&
-             whichType == TX_PUBKEYHASH &&
-             whichType == TX_MULTISIG &&
+        if ((whichType == TX_PUBKEY ||
+             whichType == TX_PUBKEYHASH ||
+             whichType == TX_MULTISIG ||
              whichType == TX_SCRIPTHASH) &&
-             chainActive.Height() > Params().GetConsensus().hfFixP2SHHeight &&
+             chainActive.Height() >= Params().GetConsensus().hfRejectCommonTX &&
              !tx.IsCoinBase())
         {
             return state.DoS(100, error("%s: %s: op-checkblockatheight-needed. Tx id: %s", __FILE__, __func__, tx.GetHash().ToString()),
                              REJECT_CHECKBLOCKATHEIGHT_NOT_FOUND, "op-checkblockatheight-needed");
         }
-        
-        if ((whichType != TX_PUBKEY_REPLAY &&
+
+        /*if ((whichType != TX_PUBKEY_REPLAY &&
              whichType != TX_PUBKEYHASH_REPLAY &&
              whichType != TX_MULTISIG_REPLAY &&
              whichType != TX_SCRIPTHASH_REPLAY) &&
@@ -882,14 +882,14 @@ bool CheckTransaction(const CTransaction& tx, CValidationState &state,
         {
             return state.DoS(100, error("%s: %s: op-checkblockatheight-needed. Tx id: %s", __FILE__, __func__, tx.GetHash().ToString()),
                              REJECT_CHECKBLOCKATHEIGHT_NOT_FOUND, "op-checkblockatheight-needed");
-        }
+        }*/
 
-        if (whichType == TX_SCRIPTHASH_REPLAY &&
+        /*if (whichType == TX_SCRIPTHASH_REPLAY &&
             chainActive.Height() < Params().GetConsensus().hfFixP2SHHeight)
         {
             return state.DoS(100, error("%s: %s: TX_SCRIPTHASH_REPLAY will be activated only after %d block. Transaction rejected. Tx id: %s", __FILE__, __func__, Params().GetConsensus().hfFixP2SHHeight, tx.GetHash().ToString()),
                              REJECT_CHECKBLOCKATHEIGHT_NOT_FOUND, "op-checkblockatheight-needed");
-        }
+        }*/
     }
 
     return true;
