@@ -113,6 +113,7 @@ Zcash error codes are defined in https://github.com/zcash/zcash/blob/master/src/
 
 RPC_INVALID_PARAMETER (-8) | _Invalid, missing or duplicate parameter_
 ---------------------------| -------------------------------------------------
+"Minconf cannot be zero when sending from zaddr" | Cannot accept minimum confirmation value of zero when sending from zaddr.
 "Minconf cannot be negative" | Cannot accept negative minimum confirmation number.
 "Minimum number of confirmations cannot be less than 0" | Cannot accept negative minimum confirmation number.
 "From address parameter missing" | Missing an address to send funds from.
